@@ -85,7 +85,6 @@
 			<artifactId>resilience4j-spring-boot2</artifactId>
 		</dependency>
 
-
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -104,6 +103,16 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${project.parent.version}</version>
+				<configuration>
+					<image>
+						<name>bellypa/mmv2-${project.artifactId}:${project.version}</name>
+						<bindings>
+							<binding>${basedir}/bindings/ca-certificates:/platform/bindings/ca-certificates</binding>
+						</bindings>
+					</image>
+					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
